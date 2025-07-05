@@ -87,7 +87,7 @@ RUN pio --version && pio run
 WORKDIR /opt/dummy-esp8266
 RUN pio --version && pio run
 
-CMD /opt/cmd.sh
+#CMD /opt/cmd.sh
 
 # Build tests for ESP-IDF (make fails with: No targets specified and no makefile found.)
 
@@ -100,3 +100,10 @@ CMD /opt/cmd.sh
 # && make
 
 # Build tests for ESP32 and ESP8266 (may take up to 20 minutes!)
+
+RUN groupadd -g 1000 nmaupu && \
+    useradd -m -u 1000 -g nmaupu nmaupu
+
+USER nmaupu
+
+CMD pio
